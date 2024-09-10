@@ -1,63 +1,85 @@
-import pdfplumber
-import json
+import fitz  # PyMuPDF
 
 # Initialize variables
 data = []
-current_chapter_title = ""
+current_title_parts = []
 is_chapter_title = False
-accumulated_text = ""
+last_top_position = None
+current_line = ""
 
 # Font size threshold for chapter titles
 CHAPTER_TITLE_SIZE_THRESHOLD = 20
 
-def finalize_chapter_title(title):
-    """Finalize the chapter title, ensuring there is a space between parts of the title if necessary."""
-    # Add a space at the end of the first line if a second line exists
-    if title:
-        # Add space before the second part if necessary
-        return title.strip()
-    return title
+def finalize_chapter_title(parts):
+    """Combine parts of the title into a single title with a space between lines if necessary."""
+    if len(parts) == 0:
+        return ""
+    combined_title = ' '.join(parts).strip()
+    return combined_title
 
 def process_page(page):
-    global accumulated_text, is_chapter_title
-    accumulated_text = ""
-    
-    for char in page.chars:
-        text = char.get('text', '')
-        font_size = char.get('size', 0)
-        
-        # If the font size is large, we might be in a chapter title
-        if font_size >= CHAPTER_TITLE_SIZE_THRESHOLD:
-            if is_chapter_title:
-                # If we are accumulating a chapter title, add the current text
-                accumulated_text += text
-            else:
-                # If we find a chapter title, start accumulating text
-                accumulated_text = text
-                is_chapter_title = True
-        else:
-            # If the font size is smaller and we are accumulating a chapter title
-            if is_chapter_title:
-                # Add a space at the end of the first line if a second line exists
-                if accumulated_text.strip():
-                    if len(text.strip()) == 0:  # If the text is empty, we might be moving to the next line
-                        accumulated_text += ' '  # Add space between lines
+    global current_title_parts, is_chapter_title, last_top_position, current_line
+    current_title_parts = []
+    is_chapter_title = False
+    last_top_position = None
+    current_line = ""
+
+    for char in page.get_text("dict")["blocks"]:
+        for line in char.get("lines", []):
+            for span in line.get("spans", []):
+                text = span.get('text', '')
+                font_size = span.get('size', 0)
+                top = span.get('bbox', [0, 0, 0, 0])[1]
+
+                print(f"Character: {text}, Font size: {font_size}, Top: {top}")
+
+                if font_size >= CHAPTER_TITLE_SIZE_THRESHOLD:
+                    if not is_chapter_title:
+                        # Starting a new chapter title
+                        current_title_parts = [text]
+                        is_chapter_title = True
+                        last_top_position = top
+                        current_line = text
+                        print(f"Starting new title: {current_line}")
                     else:
-                        # Finalize the title
-                        current_chapter_title = finalize_chapter_title(accumulated_text)
-                        data.append({"title": current_chapter_title})
-                        accumulated_text = ""
-                        is_chapter_title = False
+                        if top != last_top_position:
+                            # End of line detected
+                            if current_line.strip():  # If the current line has text, finalize it
+                                print(f"Appending line: {current_line}")
+                                #current_title_parts.append(current_line)
+                            current_line = text
+                        else:
+                            current_line += text
+
+                        last_top_position = top
                 else:
-                    accumulated_text = text
+                    # If we encounter text smaller than the threshold and we are in a title
+                    if is_chapter_title:
+                        if current_line.strip():
+                            print(f"Appending line: {current_line}")
+                            current_title_parts.append(current_line)
+                        current_chapter_title = finalize_chapter_title(current_title_parts)
+                        print(f"Added data: {current_chapter_title}")
+                        data.append({"title": current_chapter_title})
+                        current_title_parts = []
+                        is_chapter_title = False
+                        current_line = ""
+
+    # Finalize the title if the page ends with a chapter title
+    if is_chapter_title and current_line.strip():
+        print(f"Appending final line: {current_line}")
+        current_title_parts.append(current_line)
+        current_chapter_title = finalize_chapter_title(current_title_parts)
+        print(f"Added data: {current_chapter_title}")
+        data.append({"title": current_chapter_title})
 
 # Process the PDF pages
-with pdfplumber.open("data/book/ml_interviews.pdf") as pdf:
+with fitz.open("data/book/ml_interviews.pdf") as pdf:
     for page_number in range(22, 23):  # Specify page range
-        page = pdf.pages[page_number]
+        page = pdf.load_page(page_number)
         print(f"Processing page {page_number}")
         process_page(page)
 
-# Save to JSON file
-with open("data/dataset_prueba.json", "w") as jsonfile:
-    json.dump(data, jsonfile, indent=4)
+# Print the results
+import json
+print(json.dumps(data, indent=4))
