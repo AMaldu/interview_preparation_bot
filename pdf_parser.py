@@ -1,135 +1,111 @@
-import pdfplumber
+import fitz  # PyMuPDF
 import json
-import re
 
-# Initialize variables
-data = []
-current_section = {"header": None, "sections": []}
-accumulated_text = ""
-accumulated_header = ""
-current_font_size = 0
-last_font_size = None
-header_candidates = []
-collecting_header = False
+def process_pdf(file_path, start_page, end_page):
+    doc = fitz.open(file_path)
+    data = []
+    current_chapter = None
+    current_title = None
+    current_content = []
+    current_text = ""
+    current_section = ""
+    pending_text = ""
 
-# Font size thresholds
-CHAPTER_SIZE_THRESHOLD = 20
-SECTION_SIZE_THRESHOLD = 18.92
-TEXT_SIZE_THRESHOLD = 10.5
+    # Función para redondear el tamaño de letra
+    def round_font_size(size):
+        return round(size)
 
-# def finalize_current_section():
-#     """Finalize the current section, adding it to the data list."""
-#     global current_section, accumulated_text
-#     if accumulated_text.strip():
-#         current_section["sections"].append({"content": accumulated_text.strip()})
-#     if current_section["header"]:
-#         data.append(current_section)
-#     # Reset for the next section
-#     current_section = {"header": None, "sections": []}
-#     accumulated_text = ""
+    # Procesa el texto pendiente
+    def process_pending_text(pending_text, current_text):
+        if pending_text:
+            current_text += pending_text  # Sin agregar espacios extra
+            pending_text = ""
+        return pending_text, current_text
 
-def finalize_last_section():
-    """Finalize the last section for the current chapter."""
-    global accumulated_text
-    if accumulated_text.strip():
-        current_section["sections"].append({"content": accumulated_text.strip()})
-    if current_section["header"]:
-        data.append(current_section)
-    accumulated_text = ""
+    for page_num in range(start_page - 1, end_page):
+        page = doc.load_page(page_num)
+        print(f"Processing page {page_num + 1}")
+        blocks = page.get_text("dict")["blocks"]
 
-def is_chapter_header(text):
-    """Check if the text is part of a chapter header."""
-    return re.match(r'^CHAPTER\s+\d+', text, re.IGNORECASE)
+        for block in blocks:
+            if 'lines' not in block:
+                continue
 
-with pdfplumber.open("data/book/ml_interviews.pdf") as pdf:
-    for page_number in range(22, 23):
-        page = pdf.pages[page_number]
-        print(f"Processing page {page_number}")
-        
-        # Get the char and its size
-        previous_char = None
-        for char in page.chars:
-            text = char.get('text', '')
-            font_size = char.get('size', 0)
+            for line in block["lines"]:
+                line_text = ""  # Variable para acumular el texto de la línea actual
 
-            # Debugging: print the character and its font size
-            #print(f"Character: {text}, Font size: {font_size}")
+                for span in line["spans"]:
+                    font_size = round_font_size(span["size"])
+                    text = span["text"].strip()
 
-            # Compares the vertical position of the char with the previous one
-            if previous_char and previous_char['top'] != char['top']:
-                accumulated_text += " "
-
-            # Check if the text is a potential chapter header (CHAPTER <number>)
-            if font_size >= CHAPTER_SIZE_THRESHOLD:
-                if is_chapter_header(accumulated_text.strip()):
-                    print(f"Detected chapter header: {accumulated_text.strip()}")
-
-                    # Finalize the previous section before starting a new chapter
-                    if current_section["header"]:
-                        finalize_last_section()
-                    
-                    # Start accumulating the chapter title
-                    header_candidates = [accumulated_text.strip()]
-                    collecting_header = True
-                    accumulated_text = ""
-                elif collecting_header:
-                    # Accumulate chapter title words
-                    if font_size >= CHAPTER_SIZE_THRESHOLD:
-                        print(f"Accumulating chapter title: {text}")
-                        header_candidates.append(text)
+                    # Acumulamos el texto de los spans en la misma línea
+                    if text.endswith("-"):
+                        pending_text = text[:-1]  # Eliminar guion, añadir a texto pendiente
                     else:
-                        # If font size drops below the threshold, finalize the header
-                        collecting_header = False
-                        header_text = " ".join(header_candidates).strip()
-                        print(f"Final chapter header: {header_text}")
-                        current_section = {"header": header_text, "sections": []}
-                        accumulated_text = ""
+                        if pending_text:
+                            # Concatenar el texto pendiente sin espacios adicionales
+                            line_text += pending_text + text
+                            pending_text = ""
+                        else:
+                            line_text += " " + text if line_text else text
 
-            # Normal text processing
-            if font_size >= TEXT_SIZE_THRESHOLD and not collecting_header:
-                accumulated_text += text
+                # Al final de la línea, combinar el texto pendiente con el texto de la línea
+                pending_text, line_text = process_pending_text(pending_text, line_text)
 
-            previous_char = char
+                # Manejo de capítulos, títulos, secciones, y texto
+                if line_text.startswith("CHAPTER"):
+                    if current_chapter and current_title and current_content:
+                        if current_text:
+                            current_content.append({"text": current_text.strip()})
+                            current_text = ""
+                        if current_section:
+                            current_content.append({"section": current_section.strip()})
+                            current_section = ""
+                        data.append({
+                            "chapter": current_chapter,
+                            "title": current_title,
+                            "content": current_content
+                        })
+                    current_chapter = line_text
+                    current_title = None
+                    current_content = []
+                    current_text = ""
+                    current_section = ""
 
-        # Finalize the last section and chapter for the page
-        finalize_last_section()
+                elif font_size == 25:
+                    current_title = current_title + " " + line_text if current_title else line_text
+                    print(f"Accumulating title: {current_title}")
 
+                elif font_size == 19:
+                    if current_text:
+                        current_content.append({"text": current_text.strip()})
+                        current_text = ""
+                    current_section += " " + line_text if current_section else line_text
+                    print(f"Accumulating section: {line_text}")
 
+                elif font_size == 10:
+                    if current_section:
+                        current_content.append({"section": current_section.strip()})
+                        current_section = ""
+                    if current_text and not current_text.endswith(" "):
+                        current_text += " "  # Aseguramos un espacio entre líneas de texto
+                    current_text += line_text
 
-# Combine split chapter titles
-for section in data:
-    header = section["header"]
-    print(f' header is: {header}')
-    if header:
-        # Join parts if split
-        header_parts = re.split(r'(\d+)', header, maxsplit=1)
-        if len(header_parts) > 2:
-            chapter_number = header_parts[1].strip()
-            chapter_title = header_parts[2].strip()
-            if chapter_number and chapter_title:
-                section["header"] = f"CHAPTER {chapter_number} {chapter_title}"
-        else:
-            # Ensure proper format if no split detected
-            section["header"] = header.strip()
+    if current_chapter and current_title and current_content:
+        if current_text:
+            current_content.append({"text": current_text.strip()})
+        if current_section:
+            current_content.append({"section": current_section.strip()})
+        data.append({
+            "chapter": current_chapter,
+            "title": current_title,
+            "content": current_content
+        })
 
-# # Remove duplicate content in sections
-# for section in data:
-#     seen_contents = set()
-#     unique_sections = []
-#     for sec in section["sections"]:
-#         content = sec.get("content", "").strip()
-#         if content not in seen_contents:
-#             seen_contents.add(content)
-#             unique_sections.append(sec)
-#     section["sections"] = unique_sections
+    with open("data/parsed_book.json", "w") as json_file:
+        json.dump(data, json_file, indent=2, ensure_ascii=False)
 
-# Print results before saving
-for section in data:
-    print("Chapter:", section["header"])
-    for sec in section["sections"]:
-        print("  Content:", sec.get("content", ""))
-    print("-" * 80)
+    print("Procesamiento completado y guardado en 'data/parsed_book.json'.")
 
-# Save to JSON file
-with open("data/dataset.json", "w") as jsonfile:
-    json.dump(data, jsonfile, indent=4)
+# Ejecuta la función para procesar el PDF
+process_pdf("data/book/ml_interviews.pdf", 22, 286)
