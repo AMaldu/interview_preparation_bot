@@ -11,6 +11,11 @@ pandas = "*"
 flask = "*"
 sentence-transformers = "*"
 ipykernel = "*"
+ollama = "*"
+transformers = "*"
+accelerate = "*"
+bitsandbytes = "*"
+ipywidgets = "*"
 
 [dev-packages]
 tqdm = "*"
