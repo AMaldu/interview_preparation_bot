@@ -36,7 +36,8 @@ Project Workflow:
 To run this project locally, ensure you have the following:
 
     Python 3.12+
-    Conda for environment management
+    Pipenv shell to activate the virtual environment
+
     Ollama installed in the environment
     Elasticsearch for search and retrieval functionalities
 
