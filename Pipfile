@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+elasticsearch = "*"
+scikit-learn = "*"
+minsearch = "*"
+pandas = "*"
+flask = "*"
+sentence-transformers = "*"
+ipykernel = "*"
+
+[dev-packages]
+tqdm = "*"
+ipywidgets = "*"
+notebook = "*"
+ipykernel = "*"
