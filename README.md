@@ -31,6 +31,24 @@ Project Workflow:
     The project is managed using Conda environments to ensure that dependencies, such as NumPy, Pandas, and Scikit-learn, are correctly isolated.
     Data and model interactions are managed through Jupyter Notebooks, allowing for an iterative, experiment-driven approach to development.
 
+
+## Running it
+
+We use pipenv for managing dependencies and Python 3.12
+
+Make sure you have pipenv installed:
+
+```
+pip install pipenv
+```
+
+Installing the dependencies
+
+```
+pipenv install 
+```
+
+
 ## Requirements
 
 To run this project locally, ensure you have the following:
@@ -45,6 +63,22 @@ To run this project locally, ensure you have the following:
 ## Dataset
 
 ### Columns description
+
+
+## Ingestion
+
+
+## Evaluation
+
+For the code for evaluating the system you can check the [rag_gpt notebook](notebooks/rag_gpt2.ipynb)
+
+
+## Retrieval 
+
+Approach using minsearch without any boosting gave the following metrics:
+
+* 'hit_rate':
+* mrr:
 
 Usage
 
