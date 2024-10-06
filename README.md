@@ -34,7 +34,7 @@ Project Workflow:
 
 ## Running it
 
-We use pipenv for managing dependencies and Python 3.12
+We use pipenv for managing dependencies and Python 3.10
 
 Make sure you have pipenv installed:
 
@@ -53,7 +53,7 @@ pipenv install
 
 To run this project locally, ensure you have the following:
 
-    Python 3.12+
+    Python 3.10
     Pipenv shell to activate the virtual environment
 
     Ollama installed in the environment
@@ -77,8 +77,8 @@ For the code for evaluating the system you can check the [rag_gpt notebook](note
 
 Approach using minsearch without any boosting gave the following metrics:
 
-* 'hit_rate':
-* mrr:
+*'hit_rate': 0.77
+*'mrr': 0.94
 
 Usage
 
