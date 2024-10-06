@@ -21,6 +21,8 @@ torch = "*"
 torchvision = "*"
 torchaudio = "*"
 flash-attn = "*"
+nltk = "*"
+spacy = "*"
 
 [dev-packages]
 tqdm = "*"
