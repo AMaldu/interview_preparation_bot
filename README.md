@@ -9,27 +9,11 @@ This project aims to provide a structured set of technical interview questions d
 Key Components
 
 
-# Project Overview
+## Tehnologies
 
-
-Question Generation with LLMs:
-    The project uses the Ollama tool to interact with large language models, specifically Phi3 and Llama2, to generate interview questions automatically.
-    Prompts are carefully designed to ensure that the model outputs high-quality, structured questions relevant to data science interviews.
-    Generated questions are saved in JSON format for further analysis and refinement.
-
-Ground Truth Data:
-    A dataset of questions and answers is used to build a ground truth for evaluating the performance of the language model. This dataset is processed and analyzed in Jupyter Notebooks.
-
-Search and Retrieval with Elasticsearch:
-    Elasticsearch is utilized to perform semantic search and k-nearest neighbors (KNN) queries on interview questions, helping retrieve similar or related questions efficiently.
-    This system allows for filtering and ranking results based on relevance, ensuring accurate search results during the interview preparation process.
-
-Performance Evaluation:
-    The project includes a system for evaluating the performance of the LLMs in generating useful and accurate questions. Custom evaluation metrics for LLMs are employed to measure aspects such as relevance, clarity, and depth of generated content.
-
-Project Workflow:
-    The project is managed using Conda environments to ensure that dependencies, such as NumPy, Pandas, and Scikit-learn, are correctly isolated.
-    Data and model interactions are managed through Jupyter Notebooks, allowing for an iterative, experiment-driven approach to development.
+* minsearch
+* Llama2
+* Flask as the API interface
 
 
 ## Running it
@@ -38,16 +22,74 @@ We use pipenv for managing dependencies and Python 3.10
 
 Make sure you have pipenv installed:
 
-```
+```bash
 pip install pipenv
 ```
 
 Installing the dependencies
 
-```
-pipenv install 
+```bash
+pipenv install --dev
 ```
 
+## Prerequisites
+
+- Ensure you have [Ollama](https://ollama.com) installed on your system.
+
+## Llama2 setup
+
+1. Start the Ollama server:
+
+    ```bash
+    ollama serve
+    ```
+
+2. Pull the Llama2 model:
+
+    ```bash
+    ollama pull llama2
+    ```
+
+## Running the flask Application
+
+Run the following command:
+
+```bash
+pipenv run python app.py
+
+```
+## Testing the flask application:
+
+```bash
+URL="http://127.0.0.1:5000"
+DATA='{"question": "what is the scope of a data scientist?"}'
+
+curl -X POST \
+    -H "Content-Type: application/json" \
+    -d "${DATA}" \
+    "${URL}/ask"
+```
+
+## The answer will look similar to this:
+
+```json
+"conversation_id": "4b31952c-6c04-41ec-971d-649cc2c85807",
+  "question": "what is the scope of a data scientist?",
+  "result": "A data scientist's scope typically involves working on various aspects of the machine learning (ML) lifecycle, including data preparation, model development, deployment, and maintenance. The specific responsibilities may vary depending on the company, team, and job title, but some common tasks include:\n\n1. Data analysis: Cleaning, processing, and interpreting large datasets to extract insights and identify patterns.\n2. Model development: Building, training, and validating ML models using various techniques, such as supervised and unsupervised learning, deep learning, and reinforcement learning.\n3. Deployment: Integrating trained models into production environments, ensuring they are scalable and reliable.\n4. Maintenance: Monitoring model performance, updating or refreshing models as needed, and addressing any issues that arise.\n5. Collaboration: Working closely with cross-functional teams, such as engineering, product management, and business stakeholders, to identify ML opportunities and solve complex problems.\n6. Communication: Presenting findings and insights to stakeholders, communicating results effectively, and explaining technical concepts to non-technical audiences.\n7. Data visualization: Creating informative and engaging visualizations to help communicate insights and findings to stakeholders.\n8. Algorithm selection: Choosing the most appropriate algorithms and techniques for a given problem or dataset, based on factors such as data quality, complexity, and scalability.\n9. Hyperparameter tuning: Optimizing model performance by adjusting hyperparameters, which are parameters that control the behavior of ML models.\n10. Model evaluation: Assessing the performance of ML models using various metrics and techniques, such as cross-validation, to ensure they are accurate and robust.\n\nOverall, a data scientist's scope involves working on a wide range of tasks related to data analysis, model development, deployment, and maintenance, with a focus on leveraging ML techniques to drive business impact."
+
+```
+
+Alternatively you can use [test.py](test.py) for testing purposes:
+
+```bash
+pipenv run python test.py
+
+```
+
+
+## Feedback
+
+TBD
 
 ## Requirements
 
@@ -70,7 +112,7 @@ To run this project locally, ensure you have the following:
 
 ## Evaluation
 
-For the code for evaluating the system you can check the [rag_gpt notebook](notebooks/rag_gpt2.ipynb)
+For the code for evaluating the system you can check the [rag_llama2 notebook](notebooks/rag_llama2.ipynb)
 
 
 ## Retrieval 
@@ -78,7 +120,31 @@ For the code for evaluating the system you can check the [rag_gpt notebook](note
 Approach using minsearch without any boosting gave the following metrics:
 
 *'hit_rate': 0.77
-*'mrr': 0.94
+*'mrr': 0.62
+
+The optimized minsearch function gave the following metrics:
+
+*'hit_rate': 0.83
+*'mrr': 0.67
+
+The best boosting parameter:
+
+```
+'boost': 0.21
+```
+
+## Rag Flow
+
+LLM-as-a-judge as been used as metric to evaluate the quality of the RAG Flow 
+
+Among 229 records:
+
+* X RELEVANT : 213 (93%)
+* Y PARTLY RELEVANT : 16 (6%)
+* Z IRRELEVANT : 0
+
+# to do, use another RAG approach and evaluate it, then choose the best one (use a different model or prompt)
+
 
 Usage
 
