@@ -128,10 +128,6 @@ pipenv run python test.py
 ```
 
 
-### Feedback
-
-TBD
-
 ## Requirements
 
 To run this project locally, ensure you have the following:
@@ -144,16 +140,13 @@ To run this project locally, ensure you have the following:
 
 
 
-
-### Columns description
-
-
 ## Ingestion
 
+The code for ingesting the data can be checked the [ingestion script](notebooks/ingestion.py)
 
 ## Evaluation
 
-For the code for evaluating the system you can check the [rag_llama2 notebook](notebooks/rag_llama2.ipynb)
+The code for evaluating the system can be checked the [rag_llama2 script](notebooks/rag_llama2.py)
 
 
 ## Retrieval 
@@ -188,7 +181,7 @@ Among 229 records:
 
 You can find in the Grafana folder:
 
-    init.py -  initializing the datasource and the dashboard.
+    init.py -  initializing Grafana
     dashboard.json - the actual dashboard 
 
 To initialize the dashboard, first ensure Grafana is running (it starts automatically when you do docker-compose up).
@@ -199,11 +192,9 @@ pipenv shell
 
 cd grafana
 
-# make sure the POSTGRES_HOST variable is not overwritten 
 env | grep POSTGRES_HOST
 
 python init.py
-
 ```
 localhost:3000:
 
