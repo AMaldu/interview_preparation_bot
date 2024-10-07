@@ -23,6 +23,7 @@ torchaudio = "*"
 flash-attn = "*"
 nltk = "*"
 spacy = "*"
+requests = "*"
 
 [dev-packages]
 tqdm = "*"
@@ -30,3 +31,4 @@ ipywidgets = "*"
 notebook = "*"
 ipykernel = "*"
 hyperopt = "*"
+nbconvert = "*"
