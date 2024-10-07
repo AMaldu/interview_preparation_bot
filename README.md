@@ -54,13 +54,8 @@ We can do it by running the [db_prep.py](chatbot/db_prep.py) script:
 
 ```bash
 cd chatbot
-
-
 pipenv shell 
-
-
 export POSTGRES_HOST=localhost 
-
 python db_prep.py
 ```
 
