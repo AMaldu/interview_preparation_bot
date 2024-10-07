@@ -1,9 +1,11 @@
 import pandas as pd
 from minsearch import Index
 import spacy
+import os
 
+DATA_PATH = os.getenv("DATA_PATH", "/app/data/data.csv")
 
-def load_data(data_path='../data/gold/data.csv'):
+def load_data(data_path=DATA_PATH):
     """
     Load data from a CSV file and convert it into a dictionary.
 

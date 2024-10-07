@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import uuid
 from rag import rag 
+import db
 
 app = Flask(__name__)
 
@@ -16,12 +17,19 @@ def ask():
     
     conversation_id = str(uuid.uuid4())
     
-    result = rag(question)
+    result_data = rag(question)
 
     # posible movida
-    conversations[conversation_id] = {'question': question, 'result': result}
+    conversations[conversation_id] = {'question': question, 'result': result_data}
     
-    return jsonify({'conversation_id': conversation_id,'question': question, 'result': result}), 200
+    response = {'conversation_id': conversation_id,'question': question, 'result': result_data}
+    
+    db.save_conversation(conversation_id=conversation_id,
+                         question=question,
+                         result=result_data['result'])
+
+    
+    return jsonify(response),  200
 
 
 @app.route('/feedback', methods=['POST'])
