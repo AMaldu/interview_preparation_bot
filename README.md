@@ -8,6 +8,8 @@ Technical Interview Questions for Data Scientists
 This project aims to provide a structured set of technical interview questions designed for data scientists, focusing on topics such as machine learning, statistics, data manipulation, and programming. It leverages large language models (LLMs) to automatically generate, refine, and evaluate questions based on real-world interview experiences and relevant academic materials. The project uses a combination of Python tools, including Ollama, Elasticsearch, and Jupyter Notebooks, to create an efficient workflow for generating and curating high-quality interview questions.
 Key Components
 
+## Dataset
+
 
 ## Tehnologies
 
@@ -26,39 +28,82 @@ Make sure you have pipenv installed:
 pip install pipenv
 ```
 
-Installing the dependencies
+## Running it with Docker
+
+```bash
+docker-compose up
+```
+To test or change something in the Dockerfile, use the following command:
+
+```bash
+docker build -t chatbot .
+
+docker run -it --rm  \
+    -v "$(pwd)/data/gold:/data/gold" \
+    -e DATA_PATH="/data/gold/data.csv" \
+    -p 5000:5000  \
+       chatbot
+    
+```
+
+## Preparing the application
+
+Before using the app we need to initialize the database
+
+We can do it by running the [db_prep.py](chatbot/db_prep.py) script:
+
+```bash
+cd chatbot
+
+
+pipenv shell 
+
+
+export POSTGRES_HOST=localhost 
+
+python db_prep.py
+```
+
+## Running locally
+### Installing the dependencies
+
+In case you want to run it locally, you need to manally prepare the environment and install all the dependencies
 
 ```bash
 pipenv install --dev
+```
+### Running the flask Application
+
+Run the following command for running the application locally:
+
+```bash
+pipenv shell 
+export POSTGRES_HOST=localhost 
+python app.py
+
 ```
 
 ## Prerequisites
 
 - Ensure you have [Ollama](https://ollama.com) installed on your system.
 
-## Llama2 setup
+### Llama2 setup
 
 1. Start the Ollama server:
 
-    ```bash
-    ollama serve
-    ```
+```bash
+ollama serve
+```
 
 2. Pull the Llama2 model:
 
-    ```bash
-    ollama pull llama2
-    ```
-
-## Running the flask Application
-
-Run the following command:
-
 ```bash
-pipenv run python app.py
-
+ollama pull llama2
 ```
-## Testing the flask application:
+
+## Using the application
+
+### Testing the flask application:
 
 ```bash
 URL="http://127.0.0.1:5000"
@@ -70,7 +115,8 @@ curl -X POST \
     "${URL}/ask"
 ```
 
-## The answer will look similar to this:
+
+### The answer will look similar to this:
 
 ```json
 "conversation_id": "4b31952c-6c04-41ec-971d-649cc2c85807",
@@ -87,7 +133,7 @@ pipenv run python test.py
 ```
 
 
-## Feedback
+### Feedback
 
 TBD
 
@@ -102,7 +148,7 @@ To run this project locally, ensure you have the following:
     Elasticsearch for search and retrieval functionalities
 
 
-## Dataset
+
 
 ### Columns description
 
@@ -142,19 +188,4 @@ Among 229 records:
 * X RELEVANT : 213 (93%)
 * Y PARTLY RELEVANT : 16 (6%)
 * Z IRRELEVANT : 0
-
-# to do, use another RAG approach and evaluate it, then choose the best one (use a different model or prompt)
-
-
-Usage
-
-    Clone the repository and set up the environment.
-    Use the provided Jupyter Notebooks to run the question generation, search, and evaluation workflows.
-    Customize the prompts and ground truth data to generate new interview questions or refine existing ones.
-
-Future Work
-
-    Extend the system to handle multiple languages for interview questions.
-    Improve the search algorithm to include more sophisticated ranking mechanisms.
-    Integrate a scoring system to automatically assess the quality of answers provided to generated questions.
 

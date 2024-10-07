@@ -1,19 +1,20 @@
-FROM python:3.10-slim
+FROM python:3.12-slim
 
-RUN apt-get update && apt-get install -y \
-    curl \
-    wget \
-    build-essential \
-    libssl-dev \
-    libffi-dev \
-    python3-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN pip install ollama jupyter
-
-COPY . /app
 WORKDIR /app
 
-EXPOSE 8081
+RUN pip install pipenv
 
-CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8080", "--no-browser", "--allow-root"]
+COPY ["Pipfile", "Pipfile.lock", "./"]
+
+RUN pipenv install --deploy --ignore-pipfile --system
+
+COPY chatbot .
+
+RUN python -m spacy download es_core_news_sm
+
+COPY data/gold /app/data
+
+
+EXPOSE 5000
+
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
