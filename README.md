@@ -184,3 +184,30 @@ Among 229 records:
 * Y PARTLY RELEVANT : 16 (6%)
 * Z IRRELEVANT : 0
 
+## Setting up Grafana
+
+You can find in the Grafana folder:
+
+    init.py -  initializing the datasource and the dashboard.
+    dashboard.json - the actual dashboard 
+
+To initialize the dashboard, first ensure Grafana is running (it starts automatically when you do docker-compose up).
+
+Then run:
+```bash
+pipenv shell
+
+cd grafana
+
+# make sure the POSTGRES_HOST variable is not overwritten 
+env | grep POSTGRES_HOST
+
+python init.py
+
+```
+localhost:3000:
+
+    Login: "admin"
+    Password: "admin"
+
+
