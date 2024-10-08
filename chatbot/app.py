@@ -26,7 +26,7 @@ def ask():
     
     db.save_conversation(conversation_id=conversation_id,
                          question=question,
-                         result=result_data['result'])
+                         result=result_data)
 
     
     return jsonify(response),  200

@@ -3,7 +3,7 @@ from minsearch import Index
 import spacy
 import os
 
-DATA_PATH = os.getenv("DATA_PATH", "/app/data/data.csv")
+DATA_PATH = os.getenv("DATA_PATH", "../data/data.csv")
 
 def load_data(data_path=DATA_PATH):
     """

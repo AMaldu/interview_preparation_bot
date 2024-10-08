@@ -4,6 +4,8 @@ WORKDIR /app
 
 RUN pip install pipenv
 
+COPY data/data.csv data/data.csv
+
 COPY ["Pipfile", "Pipfile.lock", "./"]
 
 RUN pipenv install --deploy --ignore-pipfile --system
@@ -11,8 +13,6 @@ RUN pipenv install --deploy --ignore-pipfile --system
 COPY chatbot .
 
 RUN python -m spacy download es_core_news_sm
-
-COPY data/gold /app/data
 
 
 EXPOSE 5000

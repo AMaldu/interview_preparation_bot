@@ -20,13 +20,16 @@ Key Components
 
 ## Running it
 
-We use pipenv for managing dependencies and Python 3.10
+We use pipenv for managing dependencies and Python 3.10.12
 
 Make sure you have pipenv installed:
 
 ```bash
 pip install pipenv
 ```
+
+
+
 
 ## Running it with Docker
 
@@ -39,8 +42,7 @@ To test or change something in the Dockerfile, use the following command:
 docker build -t chatbot .
 
 docker run -it --rm  \
-    -v "$(pwd)/data/gold:/data/gold" \
-    -e DATA_PATH="/data/gold/data.csv" \
+    -e DATA_PATH="data/data.csv" \
     -p 5000:5000  \
        chatbot
     
@@ -53,8 +55,8 @@ Before using the app we need to initialize the database
 We can do it by running the [db_prep.py](chatbot/db_prep.py) script:
 
 ```bash
+pipenv shell
 cd chatbot
-pipenv shell 
 export POSTGRES_HOST=localhost 
 python db_prep.py
 ```
