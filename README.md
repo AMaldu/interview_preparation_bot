@@ -122,6 +122,27 @@ curl -X POST \
 
 ```
 
+Sending feedback:
+```bash
+ID="17c9be3e-ac88-4de7-b53d-1942a2ffe6dc"
+
+URL=http://localhost:5000
+FEEDBACK_DATA='{
+    "conversation_id": "'${ID}'",
+    "feedback": 1
+}'
+
+curl -X POST \
+    -H "Content-Type: application/json" \
+    -d "${FEEDBACK_DATA}" \
+    ${URL}/feedback
+
+ ```   
+
+
+
+
+
 Alternatively you can use [test.py](test.py) for testing purposes:
 
 ```bash
@@ -204,3 +225,5 @@ localhost:3000:
     Password: "admin"
 
 
+
+```
