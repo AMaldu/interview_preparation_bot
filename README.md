@@ -6,16 +6,14 @@ Or maybe you are already a data science professional seeking for a more senior r
 
 Do you want to strenghten your interview skills but don't know how?
 
-![No idea](https://www.google.com/url?sa=i&url=https%3A%2F%2Ftenor.com%2Fsearch%2Fi-dont-know-what-im-doing-dog-gifs&psig=AOvVaw3HQha824HeUzP-kTPue58b&ust=1728740799426000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNihp8C7hokDFQAAAAAdAAAAABAR)
+You don't even know where to start?
 
+![No idea](images/no-idea-dog.png)
 
+Don't worry I've also been there... 
 
-Would you be happy with some help when **making a roadmap to organize and structure the different aspects you have to work on** when preparing your future interviews? 
+This chatbot will help you **making a roadmap to organize and structure the different aspects you have to work on** when preparing your future interviews.
 
-
-
-
-### Then continue reading because you can be very interested in what this project can offer you... 
 
 ## Table of Contents
 
