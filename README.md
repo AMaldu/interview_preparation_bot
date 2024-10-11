@@ -9,7 +9,7 @@ Are you data science professional seeking for a more senior role that needs a ro
 This project has a chatbot based on a book aimed at aspiring professionals in machine learning (ML), data science, and related fields in artificial intelligence (AI). 
 
 
-!(images/book-cover.png)
+![Book used to train the chatbot](images/book-cover.png)
 
 
 It is valuable for those just starting out as well as more experienced professionals, including entry-level, senior-level, and technical leadership roles like staff+ or principal.
