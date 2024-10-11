@@ -33,8 +33,6 @@ You don't even know where to start?
 </div>
 
 
-![No idea](images/no-idea-dog.png)
-
 **Don't worry I've also been there...**
 
 
@@ -45,6 +43,10 @@ This chatbot will assist you in **creating a roadmap** to **organize** and **str
 
 I have created a chatbot based on a book aimed at aspiring professionals in machine learning (ML), data science, and related fields in artificial intelligence (AI). 
 
+
+<div align="center">
+    <img src="images/book-cover.png" alt="Book used to train the chatbot" width="400" />
+</div>
 
 ![Book used to train the chatbot](images/book-cover.png)
 
