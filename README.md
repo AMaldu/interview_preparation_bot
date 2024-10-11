@@ -20,11 +20,15 @@
 
 Are you a data scientist undergrad willing to land your first data scientist job but you have no idea where to start with your interview preparation? 
 
-Are already a data science professional seeking for a more senior role but without much experience in job seeking?
+Are you already a data science professional seeking for a more senior role but without much experience in job seeking?
 
 Do you want to strenghten your interview skills but don't know how?
 
+You have doubts about how the interview process going to be or what should you expect from every step? 
+
 You don't even know where to start?
+
+
 
 ![No idea](images/no-idea-dog.png)
 
