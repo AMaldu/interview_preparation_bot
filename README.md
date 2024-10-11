@@ -7,7 +7,7 @@
 ## Table of Contents
 
 - [When to use this chatbot](##when-to-use-this-chatbot)
-- [About the chatbot](##about-the-chatbot)
+- [The database](##the-database)
 - [Technologies](##technologies)
 - [Project Structure](#project-structure)
 - [Testing the app locally](#Testing-the-app-locally)
@@ -41,7 +41,7 @@ You don't even know where to start?
 This chatbot will assist you in **creating a roadmap** to **organize** and **structure** the various aspects you need to focus on while preparing **for your upcoming interviews** 🚀
 
 
-## About the chatbot
+## The database
 
 I have created a chatbot based on a book aimed at aspiring professionals in machine learning (ML), data science, and related fields in artificial intelligence (AI). 
 
