@@ -1,6 +1,6 @@
 # Interview preparation chatbot for Data Scientists
 
-** Preparing yourself for data science job interviews is a different skill set than working as a data scientist**
+**Preparing yourself for data science job interviews is a different skill set than working as a data scientist**
 
 ## Table of Contents
 
@@ -25,7 +25,7 @@ You don't even know where to start?
 
 ![No idea](images/no-idea-dog.png)
 
-**Don't worry I've also been there... **
+**Don't worry I've also been there...**
 
 This chatbot will help you **making a roadmap to organize and structure the different aspects you have to work on** when preparing your future interviews.
 
