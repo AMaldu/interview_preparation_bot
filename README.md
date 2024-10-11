@@ -8,14 +8,11 @@
 
 - [When to use this chatbot](##when-to-use-this-chatbot)
 - [The database](##the-database)
-- [Technologies](##technologies)
+- [Technologies used](##technologies-used)
 - [Project Structure](#project-structure)
 - [Testing the app locally](#Testing-the-app-locally)
-- [Installation](#installation)
+- [Results](#results)
 - [Usage](#usage)
-
-
-
 
 
 ## When to use this chatbot
@@ -105,7 +102,7 @@ sibility, and you would like a comprehensive refresher of ML material.
 • You are expecting to find a question bank. Code snippets will be brief and concise since they become outdated quickly.
 
 
-## Tech Stack Used
+## Technologies used
 
 
 * Python: The core programming language for developing the backend logic and handling data processing tasks.
