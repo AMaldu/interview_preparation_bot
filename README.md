@@ -4,7 +4,19 @@ Are you a data scientist willing to land your first data scientist job?
 
 Are you data science professional seeking for a more senior role that needs a roadmap to organize and structure the different aspects you have to work on when preparing your future interviews? 
 
-## Then continue reading because you can be very interested in what this project can offer you... 
+### Then continue reading because you can be very interested in what this project can offer you... 
+
+## Table of Contents
+
+- [Chatbot use cases](##Chatbot-use-cases)
+- [Getting Started](#getting-started)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+
+
+
+## Chatbot use cases
 
 This project has a chatbot based on a book aimed at aspiring professionals in machine learning (ML), data science, and related fields in artificial intelligence (AI). 
 
@@ -43,6 +55,7 @@ sibility, and you would like a comprehensive refresher of ML material.
 • You are expecting to find a question bank. Code snippets will be brief and concise since they become outdated quickly.
 
 
+## Main topics covered
 
 Key Components
 
