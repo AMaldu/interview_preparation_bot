@@ -1,8 +1,23 @@
 # Interview preparation chatbot for Data Scientists
 
-Are you a data scientist undergrad willing to land your first data scientist job but you have no idea where to start? 
+** Preparing yourself for data science job interviews is a different skill set than working as a data scientist**
 
-Or maybe you are already a data science professional seeking for a more senior role but without much experience in job seeking?
+## Table of Contents
+
+- [When to use this chatbot](##when-to-use-this-chatbot)
+- [About the chatbot](##about-the-chatbot)
+- [Getting Started](#getting-started)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+
+
+
+## When to use this chatbot
+
+Are you a data scientist undergrad willing to land your first data scientist job but you have no idea where to start with your interview preparation? 
+
+Are already a data science professional seeking for a more senior role but without much experience in job seeking?
 
 Do you want to strenghten your interview skills but don't know how?
 
@@ -10,18 +25,10 @@ You don't even know where to start?
 
 ![No idea](images/no-idea-dog.png)
 
-Don't worry I've also been there... 
+**Don't worry I've also been there... **
 
 This chatbot will help you **making a roadmap to organize and structure the different aspects you have to work on** when preparing your future interviews.
 
-
-## Table of Contents
-
-- [About the chatbot](##about-the-chatbot)
-- [Getting Started](#getting-started)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
 
 
 
