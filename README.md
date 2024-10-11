@@ -8,7 +8,7 @@ Are you data science professional seeking for a more senior role that needs a ro
 
 ## Table of Contents
 
-- [Chatbot use cases](##Chatbot-use-cases)
+- [About the chatbot](##about-the-chatbot)
 - [Getting Started](#getting-started)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -16,7 +16,7 @@ Are you data science professional seeking for a more senior role that needs a ro
 
 
 
-## Chatbot use cases
+## About the chatbot
 
 This project has a chatbot based on a book aimed at aspiring professionals in machine learning (ML), data science, and related fields in artificial intelligence (AI). 
 
@@ -28,7 +28,29 @@ It is valuable for those just starting out as well as more experienced professio
 
 The book is intended to help individuals who face challenges in the job search process within the ML field, offering guidance on how to navigate interviews, stand out as a candidate, and meet the often unspoken expectations of companies. Although traditional advice often suggests having advanced degrees like a PhD or at least a master’s degree, the author provides a more flexible approach for those looking to succeed without strictly following that path.
 
-## This chatbot can help you if:
+
+### Chapters of the book
+
+• Machine Learning Roles and the Interview Process
+
+• Machine Learning Job Application and Resume
+
+• Technical Interview: Machine Learning Algorithms
+
+• Technical Interview: Model Training and Evaluation
+
+• Technical Interview: Coding
+
+• Technical Interview: Model Deployment and End-to-End ML
+
+• Behavioral Interviews
+
+• Tying It All Together: Your Interview Roadmap
+
+• Post-Interview and Follow-up
+
+
+#### This chatbot can help you if:
 
 • You are a recent graduate who is eager to become an ML/AI practitioner in
 industry.
@@ -44,7 +66,7 @@ interviewing fray and aiming for a different role or an increased title and resp
 sibility, and you would like a comprehensive refresher of ML material.
 
 
-## This chatbot cannot help you if:
+### This chatbot cannot help you if:
 
 • You are looking for statistics or ML concepts.
 
@@ -55,7 +77,7 @@ sibility, and you would like a comprehensive refresher of ML material.
 • You are expecting to find a question bank. Code snippets will be brief and concise since they become outdated quickly.
 
 
-## Main topics covered
+
 
 Key Components
 
