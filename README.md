@@ -36,7 +36,7 @@ You don't even know where to start?
 
 This chatbot will help you **making a roadmap to organize and structure the different aspects you have to work on** when preparing your future interviews.
 
-
+This chatbot will assist you in **creating a roadmap** to **organize** and **structure** the various aspects you need to focus on while preparing **for your upcoming interviews**
 
 
 ## About the chatbot
