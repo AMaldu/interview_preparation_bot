@@ -1,11 +1,43 @@
-# interview_preparation_bot
+# Interview preparation bot for data scientists
 
-This project aims to provide a structured set of technical interview questions designed for data scientists, focusing on topics such as machine learning, statistics, data manipulation, and programming. It leverages large language models (LLMs) to automatically generate, refine, and evaluate questions based on real-world interview experiences and relevant academic materials. The project uses a combination of Python tools, including Ollama, Elasticsearch, and Jupyter Notebooks, to create an efficient workflow for generating and curating high-quality interview questions.
+Are you a data scientist willing to land your first data scientist job? 
 
-Claro, aquí tienes una descripción general de tu proyecto que puedes utilizar para el archivo README:
-Technical Interview Questions for Data Scientists
+Are you data science professional seeking for a more senior role that needs a roadmap to organize and structure the different aspects you have to work on when preparing your future interviews? 
 
-This project aims to provide a structured set of technical interview questions designed for data scientists, focusing on topics such as machine learning, statistics, data manipulation, and programming. It leverages large language models (LLMs) to automatically generate, refine, and evaluate questions based on real-world interview experiences and relevant academic materials. The project uses a combination of Python tools, including Ollama, Elasticsearch, and Jupyter Notebooks, to create an efficient workflow for generating and curating high-quality interview questions.
+## Then continue reading because you can be very interested in what this project can offer you... 
+
+This project has a chatbot based on a book aimed at aspiring professionals in machine learning (ML), data science, and related fields in artificial intelligence (AI). 
+
+
+![This is the book used to train the chatbot](images/book-cover.png)
+
+
+It is valuable for those just starting out as well as more experienced professionals, including entry-level, senior-level, and technical leadership roles like staff+ or principal.
+
+The book is intended to help individuals who face challenges in the job search process within the ML field, offering guidance on how to navigate interviews, stand out as a candidate, and meet the often unspoken expectations of companies. Although traditional advice often suggests having advanced degrees like a PhD or at least a master’s degree, the author provides a more flexible approach for those looking to succeed without strictly following that path.
+
+## This chatbot can help you if:
+
+• You are a recent graduate who is eager to become an ML/AI practitioner in
+industry.
+• You are a software engineer, data analyst, or other tech/data professional who is
+transitioning into a role that focuses on ML day to day.
+• You are a professional with experience in another field who is interested in tran‐
+sitioning into the ML field.
+• You are an experienced data scientist or ML practitioner who is returning to the
+interviewing fray and aiming for a different role or an increased title and respon‐
+sibility, and you would like a comprehensive refresher of ML material.
+
+
+## This chatbot cannot help you if:
+
+• You are looking for statistics or ML concepts.
+• You need to improve your coding skills.
+• You want to learn a new ML or technology.
+• You are expecting to find a question bank. Code snippets will be brief and concise since they become outdated quickly.
+
+
+
 Key Components
 
 ## Dataset
