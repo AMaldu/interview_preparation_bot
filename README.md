@@ -4,15 +4,17 @@
 > — Your trusted Chatbot
 
 
-
 ## Table of Contents
 
 - [When to use this chatbot](##when-to-use-this-chatbot)
 - [About the chatbot](##about-the-chatbot)
+- [Technologies](##technologies)
+- [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
+
+
 
 
 
@@ -36,7 +38,7 @@ You don't even know where to start?
 **Don't worry I've also been there...**
 
 
-This chatbot will assist you in **creating a roadmap** to **organize** and **structure** the various aspects you need to focus on while preparing **for your upcoming interviews**
+This chatbot will assist you in **creating a roadmap** to **organize** and **structure** the various aspects you need to focus on while preparing **for your upcoming interviews** 🚀
 
 
 ## About the chatbot
@@ -48,7 +50,6 @@ I have created a chatbot based on a book aimed at aspiring professionals in mach
     <img src="images/book-cover.png" alt="Book used to train the chatbot" width="400" />
 </div>
 
-![Book used to train the chatbot](images/book-cover.png)
 
 
 It is valuable for those just starting out as well as more experienced professionals, including entry-level, senior-level, and technical leadership roles like staff+ or principal.
@@ -77,7 +78,7 @@ The book is intended to help individuals who face challenges in the job search p
 • Post-Interview and Follow-up
 
 
-#### This chatbot can help you if:
+### This chatbot can help you if:
 
 • You are a recent graduate who is eager to become an ML/AI practitioner in
 industry.
@@ -104,18 +105,26 @@ sibility, and you would like a comprehensive refresher of ML material.
 • You are expecting to find a question bank. Code snippets will be brief and concise since they become outdated quickly.
 
 
+## Tech Stack Used
 
 
-Key Components
+    Python: The core programming language for developing the backend logic and handling data processing tasks.
+    Docker & Docker Compose: For containerization, ensuring a consistent development and production environment, making deployment easier across different platforms.
+    Minsearch: Used for efficient full-text and hybrid search, enabling rapid retrieval of relevant information from large datasets.
+    Flask: The API interface for building an interactive and user-friendly interface where users can ask questions and view results.
+    Grafana: Employed for monitoring system performance and health, with PostgreSQL serving as the backend database to store monitoring data.
+    Hugging Face Sentence Transformers: Used for encoding text to vectors to process natural language data more efficiently.
 
-## Dataset
+
+##TODO - complete technologies
+
+## Project Structure
+
+##TODO - project structure
 
 
-## Tehnologies
 
-* minsearch
-* Llama2
-* Flask as the API interface
+## Getting Started
 
 
 ## Running it
