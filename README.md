@@ -20,10 +20,13 @@ The book is intended to help individuals who face challenges in the job search p
 
 • You are a recent graduate who is eager to become an ML/AI practitioner in
 industry.
+
 • You are a software engineer, data analyst, or other tech/data professional who is
 transitioning into a role that focuses on ML day to day.
+
 • You are a professional with experience in another field who is interested in tran‐
 sitioning into the ML field.
+
 • You are an experienced data scientist or ML practitioner who is returning to the
 interviewing fray and aiming for a different role or an increased title and respon‐
 sibility, and you would like a comprehensive refresher of ML material.
@@ -32,8 +35,11 @@ sibility, and you would like a comprehensive refresher of ML material.
 ## This chatbot cannot help you if:
 
 • You are looking for statistics or ML concepts.
+
 • You need to improve your coding skills.
+
 • You want to learn a new ML or technology.
+
 • You are expecting to find a question bank. Code snippets will be brief and concise since they become outdated quickly.
 
 
