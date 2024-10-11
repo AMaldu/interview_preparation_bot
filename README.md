@@ -1,8 +1,19 @@
-# Interview preparation bot for data scientists
+# Interview preparation chatbot for Data Scientists
 
-Are you a data scientist willing to land your first data scientist job? 
+Are you a data scientist undergrad willing to land your first data scientist job but you have no idea where to start? 
 
-Are you data science professional seeking for a more senior role that needs a roadmap to organize and structure the different aspects you have to work on when preparing your future interviews? 
+Or maybe you are already a data science professional seeking for a more senior role but without much experience in job seeking?
+
+Do you want to strenghten your interview skills but don't know how?
+
+![No idea](https://www.google.com/url?sa=i&url=https%3A%2F%2Ftenor.com%2Fsearch%2Fi-dont-know-what-im-doing-dog-gifs&psig=AOvVaw3HQha824HeUzP-kTPue58b&ust=1728740799426000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNihp8C7hokDFQAAAAAdAAAAABAR)
+
+
+
+Would you be happy with some help when **making a roadmap to organize and structure the different aspects you have to work on** when preparing your future interviews? 
+
+
+
 
 ### Then continue reading because you can be very interested in what this project can offer you... 
 
