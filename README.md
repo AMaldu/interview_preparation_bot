@@ -10,7 +10,7 @@
 - [About the chatbot](##about-the-chatbot)
 - [Technologies](##technologies)
 - [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
+- [Testing the app locally](#Testing-the-app-locally)
 - [Installation](#installation)
 - [Usage](#usage)
 
@@ -108,12 +108,19 @@ sibility, and you would like a comprehensive refresher of ML material.
 ## Tech Stack Used
 
 
-    Python: The core programming language for developing the backend logic and handling data processing tasks.
-    Docker & Docker Compose: For containerization, ensuring a consistent development and production environment, making deployment easier across different platforms.
-    Minsearch: Used for efficient full-text and hybrid search, enabling rapid retrieval of relevant information from large datasets.
-    Flask: The API interface for building an interactive and user-friendly interface where users can ask questions and view results.
-    Grafana: Employed for monitoring system performance and health, with PostgreSQL serving as the backend database to store monitoring data.
-    Hugging Face Sentence Transformers: Used for encoding text to vectors to process natural language data more efficiently.
+* Python: The core programming language for developing the backend logic and handling data processing tasks.
+
+* Docker & Docker Compose: For containerization, ensuring a consistent development and production environment, making deployment easier across different platforms.
+
+* Minsearch: Used for efficient full-text and hybrid search, enabling rapid retrieval of relevant information from large datasets.
+
+* Flask: The API interface for building an interactive and user-friendly interface where users can ask questions and view results.
+
+* Grafana: Employed for monitoring system performance and health, with PostgreSQL serving as the backend database to store monitoring data.
+
+* Hugging Face Sentence Transformers: Used for encoding text to vectors to process natural language data more efficiently.
+
+* Ollama: 
 
 
 ##TODO - complete technologies
@@ -124,74 +131,36 @@ sibility, and you would like a comprehensive refresher of ML material.
 
 
 
-## Getting Started
+## Testing the app locally
 
 
-## Running it
+### Prerequisites
 
-We use pipenv for managing dependencies and Python 3.10.12
+Make sure you have the following installed on your system:
 
-Make sure you have pipenv installed:
+* Docker
+* Docker Compose
+* Python 3.10.12
+* pipenv
 
-```bash
-pip install pipenv
-```
+The app in its version 1.0 uses llama2 from [Ollama](https://ollama.com) installed on your system.
 
 
-
-
-## Running it with Docker
-
-```bash
-docker-compose up
-```
-To test or change something in the Dockerfile, use the following command:
+### 1. Clone repository
 
 ```bash
-docker build -t chatbot .
-
-docker run -it --rm  \
-    -e DATA_PATH="data/data.csv" \
-    -p 5000:5000  \
-       chatbot
-    
+git clone https://github.com/AMaldu/interview_preparation_bot.git
 ```
 
-## Preparing the application
+### 2. Install dependencies 
 
-Before using the app we need to initialize the database
-
-We can do it by running the [db_prep.py](chatbot/db_prep.py) script:
-
-```bash
-pipenv shell
-cd chatbot
-export POSTGRES_HOST=localhost 
-python db_prep.py
-```
-
-## Running locally
-### Installing the dependencies
-
-In case you want to run it locally, you need to manally prepare the environment and install all the dependencies
+In case you want to run it locally, you need to manally prepare the environment and install all the dependencies:
 
 ```bash
 pipenv install --dev
 ```
-### Running the flask Application
-
-Run the following command for running the application locally:
-
-```bash
-pipenv shell 
-export POSTGRES_HOST=localhost 
-python app.py
-
-```
-
-## Prerequisites
-
-- Ensure you have [Ollama](https://ollama.com) installed on your system.
+##TODO - ollama commands to install it locally
+---------------------------------
 
 ### Llama2 setup
 
@@ -206,10 +175,58 @@ ollama serve
 ```bash
 ollama pull llama2
 ```
+---------------------------------------
 
-## Using the application
+### 3. Build the Docker containers
 
-### Testing the flask application:
+```bash
+docker-compose build
+```
+### 4. Start the Docker containers
+
+```bash
+docker-compose up
+```
+
+To test or change something inside the Dockerfile, use the following command:
+
+```bash
+docker build -t chatbot .
+
+docker run -it --rm  \
+    -e DATA_PATH="data/data.csv" \
+    -p 5000:5000  \
+       chatbot
+    
+```
+
+### 5. Prepare the application
+
+Before using the app we need to initialize the database
+
+We can do it by running the [db_prep.py](chatbot/db_prep.py) script:
+
+```bash
+pipenv shell
+cd chatbot
+export POSTGRES_HOST=localhost 
+python db_prep.py
+```
+
+
+### 6. Run the flask Application
+
+Run the following command for running the application locally:
+
+```bash
+pipenv shell 
+export POSTGRES_HOST=localhost 
+python app.py
+
+```
+
+### Using the application
+
 
 ```bash
 URL="http://127.0.0.1:5000"
@@ -222,7 +239,7 @@ curl -X POST \
 ```
 
 
-### The answer will look similar to this:
+**The answer will look similar to this:**
 
 ```json
 "conversation_id": "4b31952c-6c04-41ec-971d-649cc2c85807",
