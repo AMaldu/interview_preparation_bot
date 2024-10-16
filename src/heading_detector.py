@@ -1,9 +1,7 @@
 import re
-import fitz  # PyMuPDF
+import fitz  
 import json
-import math
 
-# Initialize variables
 data = []
 current_title_parts = []
 is_chapter_title = False
@@ -14,7 +12,7 @@ title_size_threshold = 25
 section_size_threshold = 19
 text_size_threshold = 10
 
-# Function to round font size to nearest integer
+# Round font size to nearest integer
 def round_font_size(size):
     return round(size)
 
@@ -41,7 +39,6 @@ def process_page(page):
             for span in line.get("spans", []):
                 text = span.get('text', '')
                 font_size = round_font_size(span.get('size', 0))
-                top = span.get('bbox', [0, 0, 0, 0])[1]
 
                 # Detect CHAPTER based on regex (uppercase and followed by a number)
                 if re.match(CHAPTER_REGEX, text):
@@ -97,18 +94,17 @@ def process_page(page):
             data_entry["section"] = current_section.strip()
         data.append(data_entry)
 
-# Process the PDF pages
-with fitz.open("data/book/ml_interviews.pdf") as pdf:
-    for page_number in range(22, 25):  # Specify page range
+# Process the PDF pages. Specify the range of pages here!
+with fitz.open("../data/book/ml_interviews.pdf") as pdf:
+    for page_number in range(22, 25):  
         page = pdf.load_page(page_number)
         print(f"Processing page {page_number}")
         process_page(page)
 
-# Print the results
+# Print and save
 print(json.dumps(data, indent=4))
 
-# Save the result to a JSON file
-with open("data/dataset_prueba.json", "w", encoding="utf-8") as f:
+with open("../data/dataset_prueba.json", "w", encoding="utf-8") as f:
     json.dump(data, f, indent=4, ensure_ascii=False)
 
-print("Datos guardados en 'dataset_prueba.json'")
+print("Data saved into 'dataset_prueba.json'")
