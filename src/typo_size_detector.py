@@ -1,12 +1,11 @@
 import pdfplumber
 import json
 
-# Initialize a dictionary to hold font sizes and their corresponding text
 font_size_texts = {}
 
 
-with pdfplumber.open("data/book/ml_interviews.pdf") as pdf:
-    for page_number in range(24, 25):  # Adjust page range as needed
+with pdfplumber.open("../data/book/ml_interviews.pdf") as pdf:
+    for page_number in range(24, 25):  
         page = pdf.pages[page_number]
         print(f"Processing page {page_number}")
 
@@ -40,10 +39,9 @@ with pdfplumber.open("data/book/ml_interviews.pdf") as pdf:
             font_size_texts[current_font_size] += accumulated_text.strip() + " "
 
 # Save the results to a JSON file
-with open("data/font_size_texts.json", "w") as jsonfile:
+with open("../data/font_size_texts.json", "w") as jsonfile:
     json.dump(font_size_texts, jsonfile, indent=4)
 
-# Print results
 for font_size, text in font_size_texts.items():
     print(f"Font size: {font_size}")
     print(f"Text: {text}")

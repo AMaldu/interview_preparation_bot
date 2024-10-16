@@ -10,7 +10,7 @@ def process_pdf(file_path, start_page, end_page):
     current_section = ""
     current_text = ""
     pending_text = ""
-    section_accumulating = False  # Para saber si estamos acumulando el nombre de una sección
+    section_accumulating = False  
 
     def round_font_size(size):
         return round(size)
@@ -51,7 +51,7 @@ def process_pdf(file_path, start_page, end_page):
                 if line_text.startswith("CHAPTER"):
                     if current_chapter and current_title and current_content:
                         if current_text:
-                            current_content[-1]["text"] += current_text.strip()  # Append text to last section
+                            current_content[-1]["text"] += current_text.strip() 
                         data.append({
                             "chapter": current_chapter,
                             "title": current_title,
@@ -73,34 +73,33 @@ def process_pdf(file_path, start_page, end_page):
                 # Medium font size indicates a section, accumulate until text stops
                 elif font_size == 19:
                     if section_accumulating:
-                        current_section += " " + line_text  # Acumula el nombre de la sección
+                        current_section += " " + line_text  
                     else:
                         if current_section:
                             # Save the current section with its associated text
                             current_content.append({"section": current_section.strip(), "text": current_text.strip()})
                             current_text = ""
-                        current_section = line_text  # Start a new section
-                        section_accumulating = True  # Activa la acumulación de la sección
+                        current_section = line_text  
+                        section_accumulating = True  
                     print(f"Accumulating section: {line_text}")
 
                 # Small font size indicates regular text content
                 elif font_size == 10:
-                    section_accumulating = False  # Detenemos la acumulación de sección
+                    section_accumulating = False  
                     if current_text and not current_text.endswith(" "):
                         current_text += " "  
-                    current_text += line_text  # Accumula el texto en la sección actual
+                    current_text += line_text  
 
     # Add the last chapter and its content if exists
     if current_chapter and current_title and current_content:
         if current_text:
-            current_content[-1]["text"] += current_text.strip()  # Append text to last section
+            current_content[-1]["text"] += current_text.strip() 
         data.append({
             "chapter": current_chapter,
             "title": current_title,
             "content": current_content
         })
 
-    # Save the output to JSON
     with open("data/parsed_book.json", "w") as json_file:
         json.dump(data, json_file, indent=2, ensure_ascii=False)
 
