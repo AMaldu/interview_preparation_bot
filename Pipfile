@@ -24,6 +24,7 @@ gunicorn = "*"
 numpy = "*"
 pymupdf = "*"
 pdfplumber = "*"
+sentence-transformers = "*"
 
 [dev-packages]
 tqdm = "*"
