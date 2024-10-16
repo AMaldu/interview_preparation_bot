@@ -23,6 +23,7 @@ python-dotenv = "*"
 gunicorn = "*"
 numpy = "*"
 pymupdf = "*"
+pdfplumber = "*"
 
 [dev-packages]
 tqdm = "*"
