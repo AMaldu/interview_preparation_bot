@@ -35,7 +35,7 @@ You don't even know where to start?
 **Don't worry I've also been there...**
 
 
-This chatbot will assist you in **creating a roadmap** to **organize** and **structure** the various aspects you need to focus on while preparing **for your upcoming interviews** 🚀
+This chatbot will assist you in **creating a roadmap** to **organize** and **structure** the various aspects you need to focus on **for preparing your upcoming interviews** 🚀
 
 
 ## The database
