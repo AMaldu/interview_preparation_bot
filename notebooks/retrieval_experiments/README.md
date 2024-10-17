@@ -18,5 +18,5 @@ The basic retrieval process involves:
 5. Results: The most relevant documents or pieces of information are presented to the user.
 
  <div align="center">
-     <img src="../../images/retrieval-schema.png" alt="Retrieval Schema" width="400" />
+     <img src="../../images/retrieval-schema.png" alt="Retrieval Schema" width="800" />
  </div>
