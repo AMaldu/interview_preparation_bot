@@ -17,6 +17,9 @@ The basic retrieval process involves:
 4. Ranking: Retrieved documents are ranked by relevance using a specific metric or algorithm.
 5. Results: The most relevant documents or pieces of information are presented to the user.
 
+
+Here is an example of architecture for semantic search:
+
  <div align="center">
      <img src="../../images/retrieval-schema.png" alt="Retrieval Schema" width="800" />
  </div>
