@@ -11,12 +11,12 @@
 
 The basic retrieval process involves:
 
-* 1. User Query: A user poses a question or search expression.
-* 2. Index: The retrieval system has previously indexed a set of documents or data, allowing for fast searching.
-* 3. Search and Matching: The system compares the query to the index and finds the most relevant documents based on certain criteria.
-* 4. Ranking: Retrieved documents are ranked by relevance using a specific metric or algorithm.
-* 5. Results: The most relevant documents or pieces of information are presented to the user.
+1. User Query: A user poses a question or search expression.
+2. Index: The retrieval system has previously indexed a set of documents or data, allowing for fast searching.
+3. Search and Matching: The system compares the query to the index and finds the most relevant documents based on certain criteria.
+4. Ranking: Retrieved documents are ranked by relevance using a specific metric or algorithm.
+5. Results: The most relevant documents or pieces of information are presented to the user.
 
  <div align="center">
-     <img src="images/retrieval-schema.png" alt="Retrieval Schema" width="400" />
+     <img src="..data/images/retrieval-schema.png" alt="Retrieval Schema" width="400" />
  </div>
