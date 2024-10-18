@@ -29,17 +29,41 @@ Retrieval methods can be categorized based on the type of search, model, or tech
 6. Neural Retrieval: Deep learning models that learn to rank documents based on context and semantics.
 
 
+## Which engines you are going to find in this project?
+
+The engines used in the experimentation are:
+
+1. minsearch
+
+2. Elasticsearch
+
+### Minsearch engine approach
+
+### Elasticsearch engine approach
+
+The used methods are:
+
+1. Full-text Search: find sections or chapters that specifically talk about the interview process inside of a single field.
+
+2. Multi-field Search: since the book is structured in different chapters with titles, 
+sections and text to find results in multiple fields at the same time.
+
+3. Filtering: the book has two types of relevant chapters depending on the type of interview (technical or behavioral)
+
+4. Semantic Search: the book can be converted to semantic embeddings to use KNN so the words don't have to perfectly match. 
+
+Elasticsearch uses BM25 by default to sort the results by relevance.
+
 ## Which Retrieval Methods you are going to find in this project?
 
-1. **Semantic search**: focuses on understanding the meaning or context of words in a query, rather than relying on exact keyword matches. It retrieves documents that are contextually or conceptually relevant to the query, even if the exact keywords do not match.
+Vector Search: Uses dense_vector fields and the KNN (k-nearest neighbor) query.
+Semantic Search: Use precomputed embeddings and perform a similarity search on those vectors.
+Hybrid Search: Combine a traditional search (e.g., match query) with a KNN query in a bool query structure, similar to:
 
-2. **Text-Vector Search**: is a type of search where both the query and the documents are transformed into vector representations, and search is performed by computing the similarity between these vectors. It is embedding-based retrieval, where the text is embedded into a multi-dimensional space.
-
-
-
-
-
-
+## Elasticsearch Methods
+BM25 (Best Matching 25)
+Fuzzy Search
+Dense Vector Search
 
 
 Here is an example of architecture for semantic search:
@@ -56,3 +80,6 @@ Here is an example of architecture for semantic search:
  2. Question answering systems
  3. Recommendation systems
  4. Information retrieval tasks in NLP
+
+
+ ## Metrics used
