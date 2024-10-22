@@ -35,24 +35,12 @@ The engines used in the experimentation are:
 
 1. minsearch
 
-2. Elasticsearch
+2. Elasticsearch: 3 types of search:
 
-### Minsearch engine approach
+    * Full-text search 
+    * Semantic search
+    * Hybrid search
 
-### Elasticsearch engine approach
-
-The used methods are:
-
-1. Full-text Search: find sections or chapters that specifically talk about the interview process inside of a single field.
-
-2. Multi-field Search: since the book is structured in different chapters with titles, 
-sections and text to find results in multiple fields at the same time.
-
-3. Filtering: the book has two types of relevant chapters depending on the type of interview (technical or behavioral)
-
-4. Semantic Search: the book can be converted to semantic embeddings to use KNN so the words don't have to perfectly match. 
-
-Elasticsearch uses BM25 by default to sort the results by relevance.
 
 ## Which Retrieval Methods you are going to find in this project?
 
