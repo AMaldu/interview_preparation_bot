@@ -62,7 +62,7 @@ The engines used in the experimentation are:
 
  ## Metrics used
 
-### Hit Rate
+### Hit Rate 
 
 Hit Rate is a metric used to evaluate how often the correct result (or relevant document) appears in the top N search results. In the context of information retrieval, it measures the proportion of queries for which the correct result is found within the top N results.
 
