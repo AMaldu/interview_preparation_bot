@@ -83,3 +83,5 @@ Here is an example of architecture for semantic search:
 
 
  ## Metrics used
+
+ explain types of metrics and matrices
