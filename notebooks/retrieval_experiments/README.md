@@ -35,26 +35,16 @@ The engines used in the experimentation are:
 
 1. minsearch
 
-2. Elasticsearch: 3 types of search:
+2. Elasticsearch (3 types of search):
 
     * Full-text search 
     * Semantic search
     * Hybrid search
 
 
-## Which Retrieval Methods you are going to find in this project?
-
-Vector Search: Uses dense_vector fields and the KNN (k-nearest neighbor) query.
-Semantic Search: Use precomputed embeddings and perform a similarity search on those vectors.
-Hybrid Search: Combine a traditional search (e.g., match query) with a KNN query in a bool query structure, similar to:
-
-## Elasticsearch Methods
-BM25 (Best Matching 25)
-Fuzzy Search
-Dense Vector Search
 
 
-Here is an example of architecture for semantic search:
+### Example of architecture in Elasticsearch
 
  <div align="center">
      <img src="../../images/retrieval-schema.png" alt="Retrieval Schema" width="800" />
@@ -72,4 +62,10 @@ Here is an example of architecture for semantic search:
 
  ## Metrics used
 
- explain types of metrics and matrices
+### Hit Rate
+
+Hit Rate is a metric used to evaluate how often the correct result (or relevant document) appears in the top N search results. In the context of information retrieval, it measures the proportion of queries for which the correct result is found within the top N results.
+
+### MRR 
+
+Mean Reciprocal Rank (MRR) is a metric that considers not only if the relevant document appears in the results but also at which position. It gives more credit to results where the relevant document appears closer to the top
