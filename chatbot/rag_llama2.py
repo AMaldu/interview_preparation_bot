@@ -1,44 +1,31 @@
 
-
-
-# In[18]:
-
-
-query = 'Which skills are important for a data scietist?'
-print(rag(query))
-
-
-# ## Retrieval evaluation
-
-# In[19]:
-
-
+import re 
 import pandas as pd
+from tqdm.auto import tqdm
+import json
+
+
+
+from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
+from hyperopt.pyll import scope
+
 
 df = pd.read_csv('../data/ground_truth_data.csv')
 df
 
 
-# In[20]:
-
 
 df_questions = df[['question', 'text_id']]
 
-
-# In[21]:
 
 
 ground_truth = df_questions.to_dict(orient = 'records')
 ground_truth[0]
 
 
-# In[22]:
 
-
-ground_truth[0]
-
-
-# In[23]:
+query = 'Which skills are important for a data scietist?'
+print(rag(query))
 
 
 def hit_rate(relevance_total):
@@ -53,7 +40,6 @@ def hit_rate(relevance_total):
     return cnt / len(relevance_total)
 
 
-# In[24]:
 
 
 def mrr(relevance_total):
@@ -65,15 +51,11 @@ def mrr(relevance_total):
         for rank in range(len(line)):
             if line[rank] == True:
                 query_score = 1 / (rank + 1)
-                break  # Solo necesitamos el primero que sea True
-
+                break  
         total_score += query_score
 
-    # Evitar división por cero si no hay consultas
     return total_score / num_queries if num_queries > 0 else 0.0
 
-
-# In[25]:
 
 
 def minsearch_search(query):
@@ -88,12 +70,6 @@ def minsearch_search(query):
 
     return results
 
-
-
-# In[26]:
-
-
-from tqdm.auto import tqdm
 
 
 def evaluate(ground_truth, search_function):
@@ -111,22 +87,9 @@ def evaluate(ground_truth, search_function):
     }
 
 
-# In[27]:
-
-
-from tqdm.auto import tqdm
-
-
-# In[28]:
-
 
 evaluate(ground_truth, lambda q: minsearch_search(q['question']))
 
-
-# ## Hyperparams Optimization
-# 
-
-# In[29]:
 
 
 def minsearch_search(query, boost_value):
@@ -141,21 +104,11 @@ def minsearch_search(query, boost_value):
     return results
 
 
-# In[30]:
-
-
-from hyperopt import fmin, tpe, hp, STATUS_OK, Trials
-from hyperopt.pyll import scope
-
-
-# In[31]:
 
 
 df_val = df_questions[:100]
 df_test = df_questions[100:]
 
-
-# In[32]:
 
 
 space = {
@@ -167,73 +120,58 @@ space = {
 }
 
 
-# In[33]:
 
 
 def objective(params):
     print(f"Evaluating with params: {params}")
     
-    # Aquí puedes usar Llama2 con los parámetros y retornar la métrica
     temperature = params['temperature']
     top_p = params['top_p']
     max_length = int(params['max_length'])
     boost_value = params['boost']
     
-    # Simula la ejecución de Llama2 con los hiperparámetros
     response = rag(query)
 
-    # Calcula las métricas que deseas (hit rate y MRR)
-    hit_rate_value = hit_rate(response)  # Asegúrate de que la función hit_rate esté bien definida
+    hit_rate_value = hit_rate(response) 
     mrr_value = mrr(response)
     
-    # Invertir las métricas si estamos minimizando
     loss = - (hit_rate_value + mrr_value)
     
     return {'loss': loss, 'status': STATUS_OK}
 
-# Inicializar Trials para almacenar resultados
 trials = Trials()
 
-# Ejecución de la optimización con TPE (Tree-structured Parzen Estimator)
 best = fmin(
     fn=objective,
     space=space,
     algo=tpe.suggest,
-    max_evals=10,  # Número de iteraciones a ejecutar
+    max_evals=10, 
     trials=trials
 )
 
-# Guardar los mejores hiperparámetros
 print(f"Best hyperparameters: {best}")
 
 
-# In[34]:
 
 
 best_temperature = best['temperature']
 best_top_p = best['top_p']
 best_max_length = int(best['max_length'])
 boost = best['boost']
-# response = rag(query)
-# print(response)
 
 
-# In[35]:
 
 
-import json
 
 with open('../data/best_hyperparams.json', 'w') as f:
     json.dump(best, f)
 
 
-# In[36]:
 
 
 gt_val = df_val.to_dict(orient='records')
 
 
-# In[37]:
 
 
 def minsearch_search_optimized(query, boost):
@@ -248,20 +186,12 @@ def minsearch_search_optimized(query, boost):
     return results
 
 
-# In[38]:
 
 
 boost = {'text': best['boost']}
          
 evaluate(gt_val, lambda q: minsearch_search_optimized(q['question'], boost))
-# para mirar cuanto da con los mejores hyperparam 
 
-
-# A little bit better :)
-
-# ## RAG Evaluation
-
-# In[39]:
 
 
 prompt1_template = """
@@ -306,19 +236,7 @@ and provide your evaluation in parsable JSON without using code blocks:
 """.strip()
 
 
-# In[40]:
 
-
-len(ground_truth) 
-
-
-# In[49]:
-
-
-ground_truth[0]
-
-
-# In[41]:
 
 
 record = ground_truth[0]
@@ -326,20 +244,15 @@ question = record['question']
 answer_llm = rag(question)
 
 
-# In[42]:
-
 
 print(answer_llm)
 
 
-# In[43]:
 
 
 prompt = prompt2_template.format(question = question , answer_llm = answer_llm)
 print(prompt)
 
-
-# In[46]:
 
 
 search_results = minsearch_search_optimized(query, boost)
@@ -348,32 +261,10 @@ relevance = generate_answer(prompt, search_results)
 print(relevance)
 
 
-# In[51]:
-
 
 for record in tqdm(ground_truth):
     print(record)
 
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
-
-# In[53]:
 
 
 evaluations = []
@@ -388,28 +279,12 @@ for record in tqdm(ground_truth):
     evaluations.append((record['question'], answer_llm, relevance))
 
 
-# In[55]:
-
-
-evaluations[0]
-
-
-# In[60]:
-
-
 df_eval = pd.DataFrame(evaluations, columns=['Question', 'Response', 'Evaluation'])
 
 
-# In[61]:
 
 
-df_eval
 
-
-# In[68]:
-
-
-import re 
 
 def categorize_evaluation(text):
     if re.search(r'"NON_RELEVANT"', text):
@@ -426,20 +301,11 @@ df_eval['Category'] = df_eval['Evaluation'].apply(categorize_evaluation)
 category_counts = df_eval['Category'].value_counts()
 
 
-# In[69]:
-
-
-category_counts
-
-
-# In[71]:
-
 
 normalized_counts = df_eval['Category'].value_counts(normalize= True)
 normalized_counts
 
 
-# In[ ]:
 
 
 
