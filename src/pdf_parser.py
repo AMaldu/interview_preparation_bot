@@ -47,7 +47,6 @@ def process_pdf(file_path, start_page, end_page):
 
                 pending_text, line_text = process_pending_text(pending_text, line_text)
 
-                # Start of a new chapter
                 if line_text.startswith("CHAPTER"):
                     if current_chapter and current_title and current_content:
                         if current_text:
@@ -64,33 +63,28 @@ def process_pdf(file_path, start_page, end_page):
                     current_text = ""
                     section_accumulating = False
 
-                # Large font size indicates a title
                 elif font_size == 25:
                     current_title = current_title + " " + line_text if current_title else line_text
                     print(f"Accumulating title: {current_title}")
                     section_accumulating = False
 
-                # Medium font size indicates a section, accumulate until text stops
                 elif font_size == 19:
                     if section_accumulating:
                         current_section += " " + line_text  
                     else:
                         if current_section:
-                            # Save the current section with its associated text
                             current_content.append({"section": current_section.strip(), "text": current_text.strip()})
                             current_text = ""
                         current_section = line_text  
                         section_accumulating = True  
                     print(f"Accumulating section: {line_text}")
 
-                # Small font size indicates regular text content
                 elif font_size == 10:
                     section_accumulating = False  
                     if current_text and not current_text.endswith(" "):
                         current_text += " "  
                     current_text += line_text  
 
-    # Add the last chapter and its content if exists
     if current_chapter and current_title and current_content:
         if current_text:
             current_content[-1]["text"] += current_text.strip() 
@@ -105,4 +99,4 @@ def process_pdf(file_path, start_page, end_page):
 
     print("Processing completed and saved in 'data/parsed_book.json'.")
 
-process_pdf("data/book/ml_interviews.pdf", 22, 286)
+process_pdf("data/book/ml_interviews.pdf", 22, 286) # pages of interest 

@@ -16,7 +16,6 @@ with pdfplumber.open("../data/book/ml_interviews.pdf") as pdf:
             text = char.get('text', '')
             font_size = char.get('size', 0)
 
-            # Print character info for debugging
             print(f"Text: {text}, Font size: {font_size}")
 
             if font_size != current_font_size:
@@ -26,19 +25,15 @@ with pdfplumber.open("../data/book/ml_interviews.pdf") as pdf:
                     font_size_texts[current_font_size] += accumulated_text.strip() + " "
                 accumulated_text = ""
 
-                # Update font size
                 current_font_size = font_size
 
-            # Accumulate text for the same font size
             accumulated_text += text
 
-        # Finalize the last accumulated text for the page
         if accumulated_text.strip():
             if current_font_size not in font_size_texts:
                 font_size_texts[current_font_size] = ""
             font_size_texts[current_font_size] += accumulated_text.strip() + " "
 
-# Save the results to a JSON file
 with open("../data/font_size_texts.json", "w") as jsonfile:
     json.dump(font_size_texts, jsonfile, indent=4)
 
