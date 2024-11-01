@@ -38,7 +38,43 @@ Our book follows a structured format with chapters, sections, and subsections th
 
 However I found that one chapter has 5665 words so further chunking is needed.
 
+## Hyperparameters
 
+temperature: Controls the model's creativity.
+top_p: Limits the selected words to an accumulated probability.
+top_k: Restricts options to the k most probable words.
+frequency_penalty and presence_penalty: Penalize word repetition in text generation.
+max_tokens: Maximum length of the generated text.
+repetition_penalty: Controls the probability of word repetition.
+
+
+### Default hyperparameters
+
+The hyperparameters I chose were a general starting point commonly used for balancing coherence, creativity, and relevance in generative models like Llama2. Here’s a breakdown of why I set each one as I did:
+
+    Temperature (0.7):
+        Temperature controls randomness in the model's output. Lower values (e.g., 0.2 - 0.5) make the output more deterministic, while higher values (0.8 - 1.0) increase diversity.
+        0.7 is often a good middle ground: it encourages the model to be creative without straying too far from the prompt context.
+
+    Top-p (0.9):
+        Top-p, also known as nucleus sampling, restricts choices to the smallest set of words that have a cumulative probability mass above a certain threshold (in this case, 90%).
+        This setting allows the model to sample from a more focused subset of words, improving relevance and coherence in the generated responses.
+
+    Top-k (40):
+        Top-k limits the model to choosing from the top 40 most probable tokens at each generation step.
+        Using top-k and top-p together helps balance randomness and coherence, particularly when combined with a middle-range temperature.
+
+    Frequency Penalty (0.5) & Presence Penalty (0.4):
+        These penalties discourage the model from repeating the same words too frequently, improving text variety and natural flow.
+        A frequency penalty of 0.5 and a presence penalty of 0.4 are moderate values that help reduce redundancy without overly restricting the model's choices.
+
+    Max Tokens (200):
+        Max tokens define the maximum length of the generated output.
+        Setting this to 200 provides enough space for a complete answer while avoiding overly lengthy or verbose responses.
+
+    Repetition Penalty (1.1):
+        Repetition penalty helps prevent the model from looping or repeating phrases.
+        A value of 1.1 slightly discourages repetition without strongly impacting coherence.
 
 
 
